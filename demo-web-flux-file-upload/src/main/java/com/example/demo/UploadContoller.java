@@ -35,20 +35,6 @@ public class UploadContoller {
 		
     };
     
-    /*@RequestMapping(value = "upload", method = RequestMethod.POST)
-	Mono<Object> upload(@RequestBody Flux<FilePart> parts) {
-		
-		return parts.log().collectList().map(mparts -> {
-			return mparts.stream().map(mmp -> {
-				mmp.transferTo(new File("c:/hello/"+mmp.filename()));
-				return mmp.name() + ":" + mmp.filename();
-			}).collect(Collectors.joining(",", "[", "]"));
-			
-		});
-        //return Mono.empty();
-		
-    };*/
-		
-	
+    
 
 }
