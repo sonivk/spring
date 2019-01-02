@@ -24,10 +24,14 @@ public class UploadContoller {
 		return parts.log().collectList().map(mparts -> {
 			return mparts.stream().map(mmp -> {
 				//System.out.println("------"+  (mmp instanceof FilePart));
-				FilePart fp = (FilePart) mmp;
-				fp.transferTo(new File("c:/hello/"+fp.filename()));
-				//return mmp instanceof FilePart ? mmp.name() + ":" + ((FilePart) mmp).filename() : mmp.name();
-				return fp.name() + ":" + fp.filename();
+				if (mmp instanceof FilePart) {
+					FilePart fp = (FilePart) mmp;
+					fp.transferTo(new File("c:/hello/"+fp.filename()));
+				} else {
+					// process the other non file parts
+				}
+				return mmp instanceof FilePart ? mmp.name() + ":" + ((FilePart) mmp).filename() : mmp.name();
+				//return fp.name() + ":" + fp.filename();
 			}).collect(Collectors.joining(",", "[", "]"));
 			
 		});
@@ -35,20 +39,6 @@ public class UploadContoller {
 		
     };
     
-    /*@RequestMapping(value = "upload", method = RequestMethod.POST)
-	Mono<Object> upload(@RequestBody Flux<FilePart> parts) {
-		
-		return parts.log().collectList().map(mparts -> {
-			return mparts.stream().map(mmp -> {
-				mmp.transferTo(new File("c:/hello/"+mmp.filename()));
-				return mmp.name() + ":" + mmp.filename();
-			}).collect(Collectors.joining(",", "[", "]"));
-			
-		});
-        //return Mono.empty();
-		
-    };*/
-		
-	
+    
 
 }
